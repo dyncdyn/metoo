@@ -5741,7 +5741,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = _default;
 
-var _schedule = require("./transition/schedule.js");
+var _schedule = require("./transition/schedule");
 
 function _default(node, name) {
   var schedules = node.__transition,
@@ -5767,7 +5767,7 @@ function _default(node, name) {
 
   if (empty) delete node.__transition;
 }
-},{"./transition/schedule.js":"../node_modules/d3-transition/src/transition/schedule.js"}],"../node_modules/d3-transition/src/selection/interrupt.js":[function(require,module,exports) {
+},{"./transition/schedule":"../node_modules/d3-transition/src/transition/schedule.js"}],"../node_modules/d3-transition/src/selection/interrupt.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -5775,7 +5775,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = _default;
 
-var _interrupt = _interopRequireDefault(require("../interrupt.js"));
+var _interrupt = _interopRequireDefault(require("../interrupt"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -5784,7 +5784,7 @@ function _default(name) {
     (0, _interrupt.default)(this, name);
   });
 }
-},{"../interrupt.js":"../node_modules/d3-transition/src/interrupt.js"}],"../node_modules/d3-transition/src/transition/tween.js":[function(require,module,exports) {
+},{"../interrupt":"../node_modules/d3-transition/src/interrupt.js"}],"../node_modules/d3-transition/src/transition/tween.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -5793,7 +5793,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = _default;
 exports.tweenValue = tweenValue;
 
-var _schedule = require("./schedule.js");
+var _schedule = require("./schedule");
 
 function tweenRemove(id, name) {
   var tween0, tween1;
@@ -5877,7 +5877,7 @@ function tweenValue(transition, name, value) {
     return (0, _schedule.get)(node, id).value[name];
   };
 }
-},{"./schedule.js":"../node_modules/d3-transition/src/transition/schedule.js"}],"../node_modules/d3-transition/src/transition/interpolate.js":[function(require,module,exports) {
+},{"./schedule":"../node_modules/d3-transition/src/transition/schedule.js"}],"../node_modules/d3-transition/src/transition/interpolate.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -5905,9 +5905,9 @@ var _d3Interpolate = require("d3-interpolate");
 
 var _d3Selection = require("d3-selection");
 
-var _tween = require("./tween.js");
+var _tween = require("./tween");
 
-var _interpolate = _interopRequireDefault(require("./interpolate.js"));
+var _interpolate = _interopRequireDefault(require("./interpolate"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -5974,7 +5974,7 @@ function _default(name, value) {
       i = fullname === "transform" ? _d3Interpolate.interpolateTransformSvg : _interpolate.default;
   return this.attrTween(name, typeof value === "function" ? (fullname.local ? attrFunctionNS : attrFunction)(fullname, i, (0, _tween.tweenValue)(this, "attr." + name, value)) : value == null ? (fullname.local ? attrRemoveNS : attrRemove)(fullname) : (fullname.local ? attrConstantNS : attrConstant)(fullname, i, value));
 }
-},{"d3-interpolate":"../node_modules/d3-interpolate/src/index.js","d3-selection":"../node_modules/d3-selection/src/index.js","./tween.js":"../node_modules/d3-transition/src/transition/tween.js","./interpolate.js":"../node_modules/d3-transition/src/transition/interpolate.js"}],"../node_modules/d3-transition/src/transition/attrTween.js":[function(require,module,exports) {
+},{"d3-interpolate":"../node_modules/d3-interpolate/src/index.js","d3-selection":"../node_modules/d3-selection/src/index.js","./tween":"../node_modules/d3-transition/src/transition/tween.js","./interpolate":"../node_modules/d3-transition/src/transition/interpolate.js"}],"../node_modules/d3-transition/src/transition/attrTween.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -5986,13 +5986,13 @@ var _d3Selection = require("d3-selection");
 
 function attrInterpolate(name, i) {
   return function (t) {
-    this.setAttribute(name, i.call(this, t));
+    this.setAttribute(name, i(t));
   };
 }
 
 function attrInterpolateNS(fullname, i) {
   return function (t) {
-    this.setAttributeNS(fullname.space, fullname.local, i.call(this, t));
+    this.setAttributeNS(fullname.space, fullname.local, i(t));
   };
 }
 
@@ -6038,7 +6038,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = _default;
 
-var _schedule = require("./schedule.js");
+var _schedule = require("./schedule");
 
 function delayFunction(id, value) {
   return function () {
@@ -6056,7 +6056,7 @@ function _default(value) {
   var id = this._id;
   return arguments.length ? this.each((typeof value === "function" ? delayFunction : delayConstant)(id, value)) : (0, _schedule.get)(this.node(), id).delay;
 }
-},{"./schedule.js":"../node_modules/d3-transition/src/transition/schedule.js"}],"../node_modules/d3-transition/src/transition/duration.js":[function(require,module,exports) {
+},{"./schedule":"../node_modules/d3-transition/src/transition/schedule.js"}],"../node_modules/d3-transition/src/transition/duration.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -6064,7 +6064,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = _default;
 
-var _schedule = require("./schedule.js");
+var _schedule = require("./schedule");
 
 function durationFunction(id, value) {
   return function () {
@@ -6082,7 +6082,7 @@ function _default(value) {
   var id = this._id;
   return arguments.length ? this.each((typeof value === "function" ? durationFunction : durationConstant)(id, value)) : (0, _schedule.get)(this.node(), id).duration;
 }
-},{"./schedule.js":"../node_modules/d3-transition/src/transition/schedule.js"}],"../node_modules/d3-transition/src/transition/ease.js":[function(require,module,exports) {
+},{"./schedule":"../node_modules/d3-transition/src/transition/schedule.js"}],"../node_modules/d3-transition/src/transition/ease.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -6090,7 +6090,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = _default;
 
-var _schedule = require("./schedule.js");
+var _schedule = require("./schedule");
 
 function easeConstant(id, value) {
   if (typeof value !== "function") throw new Error();
@@ -6103,7 +6103,7 @@ function _default(value) {
   var id = this._id;
   return arguments.length ? this.each(easeConstant(id, value)) : (0, _schedule.get)(this.node(), id).ease;
 }
-},{"./schedule.js":"../node_modules/d3-transition/src/transition/schedule.js"}],"../node_modules/d3-transition/src/transition/filter.js":[function(require,module,exports) {
+},{"./schedule":"../node_modules/d3-transition/src/transition/schedule.js"}],"../node_modules/d3-transition/src/transition/filter.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -6113,7 +6113,7 @@ exports.default = _default;
 
 var _d3Selection = require("d3-selection");
 
-var _index = require("./index.js");
+var _index = require("./index");
 
 function _default(match) {
   if (typeof match !== "function") match = (0, _d3Selection.matcher)(match);
@@ -6128,7 +6128,7 @@ function _default(match) {
 
   return new _index.Transition(subgroups, this._parents, this._name, this._id);
 }
-},{"d3-selection":"../node_modules/d3-selection/src/index.js","./index.js":"../node_modules/d3-transition/src/transition/index.js"}],"../node_modules/d3-transition/src/transition/merge.js":[function(require,module,exports) {
+},{"d3-selection":"../node_modules/d3-selection/src/index.js","./index":"../node_modules/d3-transition/src/transition/index.js"}],"../node_modules/d3-transition/src/transition/merge.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -6136,7 +6136,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = _default;
 
-var _index = require("./index.js");
+var _index = require("./index");
 
 function _default(transition) {
   if (transition._id !== this._id) throw new Error();
@@ -6155,7 +6155,7 @@ function _default(transition) {
 
   return new _index.Transition(merges, this._parents, this._name, this._id);
 }
-},{"./index.js":"../node_modules/d3-transition/src/transition/index.js"}],"../node_modules/d3-transition/src/transition/on.js":[function(require,module,exports) {
+},{"./index":"../node_modules/d3-transition/src/transition/index.js"}],"../node_modules/d3-transition/src/transition/on.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -6163,7 +6163,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = _default;
 
-var _schedule = require("./schedule.js");
+var _schedule = require("./schedule");
 
 function start(name) {
   return (name + "").trim().split(/^|\s+/).every(function (t) {
@@ -6192,7 +6192,7 @@ function _default(name, listener) {
   var id = this._id;
   return arguments.length < 2 ? (0, _schedule.get)(this.node(), id).on.on(name) : this.each(onFunction(id, name, listener));
 }
-},{"./schedule.js":"../node_modules/d3-transition/src/transition/schedule.js"}],"../node_modules/d3-transition/src/transition/remove.js":[function(require,module,exports) {
+},{"./schedule":"../node_modules/d3-transition/src/transition/schedule.js"}],"../node_modules/d3-transition/src/transition/remove.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -6223,9 +6223,9 @@ exports.default = _default;
 
 var _d3Selection = require("d3-selection");
 
-var _index = require("./index.js");
+var _index = require("./index");
 
-var _schedule = _interopRequireWildcard(require("./schedule.js"));
+var _schedule = _interopRequireWildcard(require("./schedule"));
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
 
@@ -6248,7 +6248,7 @@ function _default(select) {
 
   return new _index.Transition(subgroups, this._parents, name, id);
 }
-},{"d3-selection":"../node_modules/d3-selection/src/index.js","./index.js":"../node_modules/d3-transition/src/transition/index.js","./schedule.js":"../node_modules/d3-transition/src/transition/schedule.js"}],"../node_modules/d3-transition/src/transition/selectAll.js":[function(require,module,exports) {
+},{"d3-selection":"../node_modules/d3-selection/src/index.js","./index":"../node_modules/d3-transition/src/transition/index.js","./schedule":"../node_modules/d3-transition/src/transition/schedule.js"}],"../node_modules/d3-transition/src/transition/selectAll.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -6258,9 +6258,9 @@ exports.default = _default;
 
 var _d3Selection = require("d3-selection");
 
-var _index = require("./index.js");
+var _index = require("./index");
 
-var _schedule = _interopRequireWildcard(require("./schedule.js"));
+var _schedule = _interopRequireWildcard(require("./schedule"));
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
 
@@ -6288,7 +6288,7 @@ function _default(select) {
 
   return new _index.Transition(subgroups, parents, name, id);
 }
-},{"d3-selection":"../node_modules/d3-selection/src/index.js","./index.js":"../node_modules/d3-transition/src/transition/index.js","./schedule.js":"../node_modules/d3-transition/src/transition/schedule.js"}],"../node_modules/d3-transition/src/transition/selection.js":[function(require,module,exports) {
+},{"d3-selection":"../node_modules/d3-selection/src/index.js","./index":"../node_modules/d3-transition/src/transition/index.js","./schedule":"../node_modules/d3-transition/src/transition/schedule.js"}],"../node_modules/d3-transition/src/transition/selection.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -6315,11 +6315,11 @@ var _d3Interpolate = require("d3-interpolate");
 
 var _d3Selection = require("d3-selection");
 
-var _schedule = require("./schedule.js");
+var _schedule = require("./schedule");
 
-var _tween = require("./tween.js");
+var _tween = require("./tween");
 
-var _interpolate = _interopRequireDefault(require("./interpolate.js"));
+var _interpolate = _interopRequireDefault(require("./interpolate"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -6382,7 +6382,7 @@ function _default(name, value, priority) {
   var i = (name += "") === "transform" ? _d3Interpolate.interpolateTransformCss : _interpolate.default;
   return value == null ? this.styleTween(name, styleNull(name, i)).on("end.style." + name, styleRemove(name)) : typeof value === "function" ? this.styleTween(name, styleFunction(name, i, (0, _tween.tweenValue)(this, "style." + name, value))).each(styleMaybeRemove(this._id, name)) : this.styleTween(name, styleConstant(name, i, value), priority).on("end.style." + name, null);
 }
-},{"d3-interpolate":"../node_modules/d3-interpolate/src/index.js","d3-selection":"../node_modules/d3-selection/src/index.js","./schedule.js":"../node_modules/d3-transition/src/transition/schedule.js","./tween.js":"../node_modules/d3-transition/src/transition/tween.js","./interpolate.js":"../node_modules/d3-transition/src/transition/interpolate.js"}],"../node_modules/d3-transition/src/transition/styleTween.js":[function(require,module,exports) {
+},{"d3-interpolate":"../node_modules/d3-interpolate/src/index.js","d3-selection":"../node_modules/d3-selection/src/index.js","./schedule":"../node_modules/d3-transition/src/transition/schedule.js","./tween":"../node_modules/d3-transition/src/transition/tween.js","./interpolate":"../node_modules/d3-transition/src/transition/interpolate.js"}],"../node_modules/d3-transition/src/transition/styleTween.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -6392,7 +6392,7 @@ exports.default = _default;
 
 function styleInterpolate(name, i, priority) {
   return function (t) {
-    this.style.setProperty(name, i.call(this, t), priority);
+    this.style.setProperty(name, i(t), priority);
   };
 }
 
@@ -6424,7 +6424,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = _default;
 
-var _tween = require("./tween.js");
+var _tween = require("./tween");
 
 function textConstant(value) {
   return function () {
@@ -6442,7 +6442,7 @@ function textFunction(value) {
 function _default(value) {
   return this.tween("text", typeof value === "function" ? textFunction((0, _tween.tweenValue)(this, "text", value)) : textConstant(value == null ? "" : value + ""));
 }
-},{"./tween.js":"../node_modules/d3-transition/src/transition/tween.js"}],"../node_modules/d3-transition/src/transition/textTween.js":[function(require,module,exports) {
+},{"./tween":"../node_modules/d3-transition/src/transition/tween.js"}],"../node_modules/d3-transition/src/transition/transition.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -6450,43 +6450,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = _default;
 
-function textInterpolate(i) {
-  return function (t) {
-    this.textContent = i.call(this, t);
-  };
-}
+var _index = require("./index");
 
-function textTween(value) {
-  var t0, i0;
-
-  function tween() {
-    var i = value.apply(this, arguments);
-    if (i !== i0) t0 = (i0 = i) && textInterpolate(i);
-    return t0;
-  }
-
-  tween._value = value;
-  return tween;
-}
-
-function _default(value) {
-  var key = "text";
-  if (arguments.length < 1) return (key = this.tween(key)) && key._value;
-  if (value == null) return this.tween(key, null);
-  if (typeof value !== "function") throw new Error();
-  return this.tween(key, textTween(value));
-}
-},{}],"../node_modules/d3-transition/src/transition/transition.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = _default;
-
-var _index = require("./index.js");
-
-var _schedule = _interopRequireWildcard(require("./schedule.js"));
+var _schedule = _interopRequireWildcard(require("./schedule"));
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
 
@@ -6513,7 +6479,7 @@ function _default() {
 
   return new _index.Transition(groups, this._parents, name, id1);
 }
-},{"./index.js":"../node_modules/d3-transition/src/transition/index.js","./schedule.js":"../node_modules/d3-transition/src/transition/schedule.js"}],"../node_modules/d3-transition/src/transition/end.js":[function(require,module,exports) {
+},{"./index":"../node_modules/d3-transition/src/transition/index.js","./schedule":"../node_modules/d3-transition/src/transition/schedule.js"}],"../node_modules/d3-transition/src/transition/end.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -6521,7 +6487,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = _default;
 
-var _schedule = require("./schedule.js");
+var _schedule = require("./schedule");
 
 function _default() {
   var on0,
@@ -6558,7 +6524,7 @@ function _default() {
     });
   });
 }
-},{"./schedule.js":"../node_modules/d3-transition/src/transition/schedule.js"}],"../node_modules/d3-transition/src/transition/index.js":[function(require,module,exports) {
+},{"./schedule":"../node_modules/d3-transition/src/transition/schedule.js"}],"../node_modules/d3-transition/src/transition/index.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -6570,43 +6536,41 @@ exports.newId = newId;
 
 var _d3Selection = require("d3-selection");
 
-var _attr = _interopRequireDefault(require("./attr.js"));
+var _attr = _interopRequireDefault(require("./attr"));
 
-var _attrTween = _interopRequireDefault(require("./attrTween.js"));
+var _attrTween = _interopRequireDefault(require("./attrTween"));
 
-var _delay = _interopRequireDefault(require("./delay.js"));
+var _delay = _interopRequireDefault(require("./delay"));
 
-var _duration = _interopRequireDefault(require("./duration.js"));
+var _duration = _interopRequireDefault(require("./duration"));
 
-var _ease = _interopRequireDefault(require("./ease.js"));
+var _ease = _interopRequireDefault(require("./ease"));
 
-var _filter = _interopRequireDefault(require("./filter.js"));
+var _filter = _interopRequireDefault(require("./filter"));
 
-var _merge = _interopRequireDefault(require("./merge.js"));
+var _merge = _interopRequireDefault(require("./merge"));
 
-var _on = _interopRequireDefault(require("./on.js"));
+var _on = _interopRequireDefault(require("./on"));
 
-var _remove = _interopRequireDefault(require("./remove.js"));
+var _remove = _interopRequireDefault(require("./remove"));
 
-var _select = _interopRequireDefault(require("./select.js"));
+var _select = _interopRequireDefault(require("./select"));
 
-var _selectAll = _interopRequireDefault(require("./selectAll.js"));
+var _selectAll = _interopRequireDefault(require("./selectAll"));
 
-var _selection = _interopRequireDefault(require("./selection.js"));
+var _selection = _interopRequireDefault(require("./selection"));
 
-var _style = _interopRequireDefault(require("./style.js"));
+var _style = _interopRequireDefault(require("./style"));
 
-var _styleTween = _interopRequireDefault(require("./styleTween.js"));
+var _styleTween = _interopRequireDefault(require("./styleTween"));
 
-var _text = _interopRequireDefault(require("./text.js"));
+var _text = _interopRequireDefault(require("./text"));
 
-var _textTween = _interopRequireDefault(require("./textTween.js"));
+var _transition = _interopRequireDefault(require("./transition"));
 
-var _transition = _interopRequireDefault(require("./transition.js"));
+var _tween = _interopRequireDefault(require("./tween"));
 
-var _tween = _interopRequireDefault(require("./tween.js"));
-
-var _end = _interopRequireDefault(require("./end.js"));
+var _end = _interopRequireDefault(require("./end"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -6648,7 +6612,6 @@ Transition.prototype = transition.prototype = {
   style: _style.default,
   styleTween: _styleTween.default,
   text: _text.default,
-  textTween: _textTween.default,
   remove: _remove.default,
   tween: _tween.default,
   delay: _delay.default,
@@ -6656,7 +6619,7 @@ Transition.prototype = transition.prototype = {
   ease: _ease.default,
   end: _end.default
 };
-},{"d3-selection":"../node_modules/d3-selection/src/index.js","./attr.js":"../node_modules/d3-transition/src/transition/attr.js","./attrTween.js":"../node_modules/d3-transition/src/transition/attrTween.js","./delay.js":"../node_modules/d3-transition/src/transition/delay.js","./duration.js":"../node_modules/d3-transition/src/transition/duration.js","./ease.js":"../node_modules/d3-transition/src/transition/ease.js","./filter.js":"../node_modules/d3-transition/src/transition/filter.js","./merge.js":"../node_modules/d3-transition/src/transition/merge.js","./on.js":"../node_modules/d3-transition/src/transition/on.js","./remove.js":"../node_modules/d3-transition/src/transition/remove.js","./select.js":"../node_modules/d3-transition/src/transition/select.js","./selectAll.js":"../node_modules/d3-transition/src/transition/selectAll.js","./selection.js":"../node_modules/d3-transition/src/transition/selection.js","./style.js":"../node_modules/d3-transition/src/transition/style.js","./styleTween.js":"../node_modules/d3-transition/src/transition/styleTween.js","./text.js":"../node_modules/d3-transition/src/transition/text.js","./textTween.js":"../node_modules/d3-transition/src/transition/textTween.js","./transition.js":"../node_modules/d3-transition/src/transition/transition.js","./tween.js":"../node_modules/d3-transition/src/transition/tween.js","./end.js":"../node_modules/d3-transition/src/transition/end.js"}],"../node_modules/d3-ease/src/linear.js":[function(require,module,exports) {
+},{"d3-selection":"../node_modules/d3-selection/src/index.js","./attr":"../node_modules/d3-transition/src/transition/attr.js","./attrTween":"../node_modules/d3-transition/src/transition/attrTween.js","./delay":"../node_modules/d3-transition/src/transition/delay.js","./duration":"../node_modules/d3-transition/src/transition/duration.js","./ease":"../node_modules/d3-transition/src/transition/ease.js","./filter":"../node_modules/d3-transition/src/transition/filter.js","./merge":"../node_modules/d3-transition/src/transition/merge.js","./on":"../node_modules/d3-transition/src/transition/on.js","./remove":"../node_modules/d3-transition/src/transition/remove.js","./select":"../node_modules/d3-transition/src/transition/select.js","./selectAll":"../node_modules/d3-transition/src/transition/selectAll.js","./selection":"../node_modules/d3-transition/src/transition/selection.js","./style":"../node_modules/d3-transition/src/transition/style.js","./styleTween":"../node_modules/d3-transition/src/transition/styleTween.js","./text":"../node_modules/d3-transition/src/transition/text.js","./transition":"../node_modules/d3-transition/src/transition/transition.js","./tween":"../node_modules/d3-transition/src/transition/tween.js","./end":"../node_modules/d3-transition/src/transition/end.js"}],"../node_modules/d3-ease/src/linear.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -7225,9 +7188,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = _default;
 
-var _index = require("../transition/index.js");
+var _index = require("../transition/index");
 
-var _schedule = _interopRequireDefault(require("../transition/schedule.js"));
+var _schedule = _interopRequireDefault(require("../transition/schedule"));
 
 var _d3Ease = require("d3-ease");
 
@@ -7274,20 +7237,20 @@ function _default(name) {
 
   return new _index.Transition(groups, this._parents, name, id);
 }
-},{"../transition/index.js":"../node_modules/d3-transition/src/transition/index.js","../transition/schedule.js":"../node_modules/d3-transition/src/transition/schedule.js","d3-ease":"../node_modules/d3-ease/src/index.js","d3-timer":"../node_modules/d3-timer/src/index.js"}],"../node_modules/d3-transition/src/selection/index.js":[function(require,module,exports) {
+},{"../transition/index":"../node_modules/d3-transition/src/transition/index.js","../transition/schedule":"../node_modules/d3-transition/src/transition/schedule.js","d3-ease":"../node_modules/d3-ease/src/index.js","d3-timer":"../node_modules/d3-timer/src/index.js"}],"../node_modules/d3-transition/src/selection/index.js":[function(require,module,exports) {
 "use strict";
 
 var _d3Selection = require("d3-selection");
 
-var _interrupt = _interopRequireDefault(require("./interrupt.js"));
+var _interrupt = _interopRequireDefault(require("./interrupt"));
 
-var _transition = _interopRequireDefault(require("./transition.js"));
+var _transition = _interopRequireDefault(require("./transition"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 _d3Selection.selection.prototype.interrupt = _interrupt.default;
 _d3Selection.selection.prototype.transition = _transition.default;
-},{"d3-selection":"../node_modules/d3-selection/src/index.js","./interrupt.js":"../node_modules/d3-transition/src/selection/interrupt.js","./transition.js":"../node_modules/d3-transition/src/selection/transition.js"}],"../node_modules/d3-transition/src/active.js":[function(require,module,exports) {
+},{"d3-selection":"../node_modules/d3-selection/src/index.js","./interrupt":"../node_modules/d3-transition/src/selection/interrupt.js","./transition":"../node_modules/d3-transition/src/selection/transition.js"}],"../node_modules/d3-transition/src/active.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -7295,9 +7258,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = _default;
 
-var _index = require("./transition/index.js");
+var _index = require("./transition/index");
 
-var _schedule = require("./transition/schedule.js");
+var _schedule = require("./transition/schedule");
 
 var root = [null];
 
@@ -7318,7 +7281,7 @@ function _default(node, name) {
 
   return null;
 }
-},{"./transition/index.js":"../node_modules/d3-transition/src/transition/index.js","./transition/schedule.js":"../node_modules/d3-transition/src/transition/schedule.js"}],"../node_modules/d3-transition/src/index.js":[function(require,module,exports) {
+},{"./transition/index":"../node_modules/d3-transition/src/transition/index.js","./transition/schedule":"../node_modules/d3-transition/src/transition/schedule.js"}],"../node_modules/d3-transition/src/index.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -7343,16 +7306,16 @@ Object.defineProperty(exports, "interrupt", {
   }
 });
 
-require("./selection/index.js");
+require("./selection/index");
 
-var _index2 = _interopRequireDefault(require("./transition/index.js"));
+var _index2 = _interopRequireDefault(require("./transition/index"));
 
-var _active = _interopRequireDefault(require("./active.js"));
+var _active = _interopRequireDefault(require("./active"));
 
-var _interrupt = _interopRequireDefault(require("./interrupt.js"));
+var _interrupt = _interopRequireDefault(require("./interrupt"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-},{"./selection/index.js":"../node_modules/d3-transition/src/selection/index.js","./transition/index.js":"../node_modules/d3-transition/src/transition/index.js","./active.js":"../node_modules/d3-transition/src/active.js","./interrupt.js":"../node_modules/d3-transition/src/interrupt.js"}],"../node_modules/d3-brush/src/event.js":[function(require,module,exports) {
+},{"./selection/index":"../node_modules/d3-transition/src/selection/index.js","./transition/index":"../node_modules/d3-transition/src/transition/index.js","./active":"../node_modules/d3-transition/src/active.js","./interrupt":"../node_modules/d3-transition/src/interrupt.js"}],"../node_modules/d3-brush/src/event.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
